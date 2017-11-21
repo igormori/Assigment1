@@ -41,7 +41,7 @@ if($i>0) {
 
         } else if (isset($_POST['delete' . $i])) {
 
-//          <---------   To delete the image file  ---------->
+//          <---------   To delete the image file  ---------->>
 
             $mydata = file("data.txt"); // open a file and put into an array
             list($id,$title, $first, $last, $email, $site, $cellNumber, $homeNumber, $officeNumber, $twitter, $facebook, $picture, $comment) = explode("|", $mydata[$i]);
