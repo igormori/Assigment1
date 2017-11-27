@@ -3,11 +3,15 @@
 
 include "CONTACT.php";  // include the header and search box
 
-$img = @$_FILES['picture']['name'];
-$temporary = @$_FILES['picture']['tmp_name'];
-$loc="C:xampp\htdocs\Assigment1\\";
+$img = @$_FILES['picture']['name'];           // NAME OF MY FILE
+$temporary = @$_FILES['picture']['tmp_name']; // THE NAME OF MY TEMPORARY FILE
+$loc="C:xampp\htdocs\Assigment1\\";           // WHERE I WOULD LIKE TO SEND MY FILE
 move_uploaded_file($temporary,$loc.$img);
 
+// how to send many files to the serve
+
+// on the form after the name of the file i have to add [] =  name="filename[]"
+//
 
 if(isset($_POST['submit']))
 {
@@ -19,7 +23,7 @@ if(isset($_POST['submit']))
             touch($file_name);   //if the file does not exist touch() will create it
             $handle = fopen($file_name, "r+"); // fopne() opens a file name
 
-        } else {                                       // if the file exist
+        } else {                                        // if the file exist
             $handle = fopen($file_name, "r+");// $handle you hold the file open function
             $id = fread($handle, filesize($file_name));  // id  holds the file size the file.lenght
             settype($id, "integer");            // this will set the $id (file lenght) to a integer

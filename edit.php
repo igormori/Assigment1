@@ -10,13 +10,13 @@ $loc="C:xampp\htdocs\Assigment1\\";
 move_uploaded_file($temporary,$loc.$img);
 
 
-
 $holdId = $_SESSION['number'] ; // hold my variable from other file in a variale
+
+
 //      <---------   show the form with filled fields ---------->
 
 $mydata = file("data.txt"); //open the file in an array
-list($holdId,$title, $first, $last, $email, $site, $cellNumber, $homeNumber, $officeNumber, $twitter, $facebook, $picture, $comment) = explode("|", $mydata[$holdId]);
-
+list($id1,$title, $first, $last, $email, $site, $cellNumber, $homeNumber, $officeNumber, $twitter, $facebook, $picture, $comment) = explode("|", $mydata[$holdId]);
 
 print ("<form method='post' enctype='multipart/form-data'>
 
@@ -41,7 +41,7 @@ print ("<form method='post' enctype='multipart/form-data'>
     Facebook:<br/>
     <input name='facebook' type='text' value='$facebook' ><br/>
     Picture:<br/>
-    <input name='picture' type='file' value='$picture'><br/>
+    <input name='picture' type='file' value='$picture' ><br/>
     Comment:<br/>
     <textarea name='comment' type='text' > </textarea><br/>
     <input id='edit' name='submit' type='submit' >
@@ -52,20 +52,28 @@ print ("<form method='post' enctype='multipart/form-data'>
 
 $holdIndex = $holdId;
 echo $holdId;
-//$holdIndex++; // this variable will be my id number in the flat file
-$holdId--;
+$holdIndex++; // this variable will be my id number in the flat file
 
 
 //this happen because when i create an array from my flat file the first line will be 0 the second will be 1
 //and so on. So, i have to assign a different id for my first contact, that is why i increased it by one.
 
-function edit1($title,$first,$last,$email,$site,$cellNumber,$homeNumber,$officeNumber,$twitter,$facebook,$picture,$comment)
+function edit1($title,$first,$last,$email,$site,$cellNumber,$homeNumber,$officeNumber,$twitter,$facebook,$img,$comment)
 {
 
-    global $holdId,$holdIndex;
+    global $holdId,$holdIndex,$picture;
     if(isset($_POST['submit'])&& $title != null && $first!= null && $last != null)
     {
-        $all = "$holdIndex|$title|$first|$last|$email|$site|$cellNumber|$homeNumber|$officeNumber|$twitter|$facebook|$picture|$comment\n";
+        $all = "$holdIndex|$title|$first|$last|$email|$site|$cellNumber|$homeNumber|$officeNumber|$twitter|$facebook|$img|$comment\n";
+
+        //<---------------- To delete the current image and replace with other picture-------------------->
+
+            $mydata = file("data.txt"); // open a file and put into an array
+            list($id,$title, $first, $last, $email, $site, $cellNumber, $homeNumber, $officeNumber, $twitter, $facebook, $picture, $comment) = explode("|", $mydata[$holdId     ]);
+            unlink("$picture");//delete the image file
+
+        //<---------------------        To include the nel data to my file           ---------------------->
+
         $mydata = file("data.txt");
         $mydata[$holdId] = $all;
         file_put_contents("data.txt",implode("",$mydata));
@@ -74,6 +82,8 @@ function edit1($title,$first,$last,$email,$site,$cellNumber,$homeNumber,$officeN
         header("Refresh:0; url=viewContact.php"); // to reload the page after click submit
     }
     else if(isset($_POST['cancel'])){
+
+        header("Refresh:0; url=viewContact.php"); // to reload the page after click submit
 
     }
 

@@ -43,3 +43,46 @@ input {
 input[type=search]:focus {
     border: 2px;
 }
+
+#contactApp{
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size   : 50px;
+    padding: 30px;
+
+}
+
+a {text-decoration: none;}
+
+#add{
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size   : 30px;
+    padding: 30px;
+
+}
+#view{
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    font-size   : 30px;
+    padding:30px;
+}
+#action{
+    text-align: center;
+}
+
+#add:hover{
+    background-color: darkgrey;
+    border-style: outset;
+}
+#view:hover{
+    background-color: darkgrey;
+    border-style: outset;
+}
+
+table{
+    text-align: center;
+}
+th{
+    text-align: center;
+}

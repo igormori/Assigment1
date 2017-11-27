@@ -16,41 +16,38 @@
 
 <h1 id='title'> Contact Application  </h1>
 
-<form action="CONTACT.php" id="search" method="post">
+<form action="CONTACT.php"  id="search" method="post">
 
     <input name="search" type="search">
     <input name="submit1" type="submit" value="Search">
 
 </form>
 
-<a href="CONTACT.php"><h1>Contact App</h1></a>
+<a href="CONTACT.php"><h1 id="contactApp" >Contact App</h1></a>
 
-<a href="addContact.php">Add contacts</a>
-<a href="viewContact.php">View Contacts</a>
+<div id="action">
+<a id="add" href="addContact.php">Add contacts</a>
 
+<a id="view" href="viewContact.php">View Contacts</a>
+</div>
 
 </body>
 </html>
 
 <?php
 
-if(isset($_POST['submit1']) AND !empty($_POST['search']) ){
-
-
-
+if(isset($_POST['submit1']) && !empty($_POST['search']) ){
     function search($search)
     {
-
-
-        print "<table><tr><th>Title</th><th>First Name</th><th>Last Name</th></tr>";
 
         $theData = file("data.txt");
 
         foreach ($theData as $line)
         {
             list($id,$title,$first,$last,$email,$site,$cellNumber,$homeNumber,$officeNumber,$twitter,$facebook,$picture,$comment)= explode("|",$line);
-            if( $search == $last || $search == $first)
+            if( $search == $last OR $search == $first)
             {
+                print "<table><tr><th>Title</th><th>First Name</th><th>Last Name</th></tr>";
                 print("<tr>");
                 print("<td>$title</td>");
                 print("<td>$first</td>");
@@ -58,7 +55,11 @@ if(isset($_POST['submit1']) AND !empty($_POST['search']) ){
                 print("<td><img src='$picture' height='100px' width='150px' > </td>");
                 print("</tr>");
                 break;
+
             }
+//            else{
+//                echo '<script language="javascript">alert("Contact was not found")</script>';
+//            }
 
         }
 
@@ -67,6 +68,8 @@ if(isset($_POST['submit1']) AND !empty($_POST['search']) ){
 
     search(@$_POST['search']);
 }
+
+
 
 
 

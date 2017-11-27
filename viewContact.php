@@ -34,15 +34,18 @@ if($i>0) {
 
         if (isset($_POST[$i])) { // this take only the id that i have clicked
 
-            session_start();// to save the variable to be acessed in other files in this project
+
+
+            session_start();// to save the variable to be accessed in other files in this project
             $_SESSION['number'] = $i;// this is the variable that i want to save
-            echo("<script>if(confirm('Would you like to edit this contact?')){window.location = 'edit.php';} else {};</script>");//script to do the validation then go the de page that i want to go
+            echo("<script>if(confirm('Would you like to edit this contact?$i')){window.location = 'edit.php';} else {};</script>");//script to do the validation then go the de page that i want to go
             break;
 
         } else if (isset($_POST['delete' . $i])) {
 
-//          <---------   To delete the image file  ---------->>
+//          <---------   To delete the image file  ---------->
 
+            echo("<script>if(confirm('Would you like to edit this contact?$i')){} else {window.location = 'viewContact.php';};</script>");
             $mydata = file("data.txt"); // open a file and put into an array
             list($id,$title, $first, $last, $email, $site, $cellNumber, $homeNumber, $officeNumber, $twitter, $facebook, $picture, $comment) = explode("|", $mydata[$i]);
             unlink("$picture");//delete the image file
@@ -55,7 +58,7 @@ if($i>0) {
             file_put_contents("data.txt", implode("", $mydata));//function to open the file and put inside of my file
 
             header("Refresh:0; url=viewContact.php"); // to reload the page after click submit
-            break;
+
         }
     }
 }
