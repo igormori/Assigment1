@@ -2,16 +2,17 @@
 <?php
 
 include "CONTACT.php";  // include the header and search box
-
+$current =getcwd();
 $img = @$_FILES['picture']['name'];           // NAME OF MY FILE
 $temporary = @$_FILES['picture']['tmp_name']; // THE NAME OF MY TEMPORARY FILE
-$loc="C:xampp\htdocs\Assigment1\\";           // WHERE I WOULD LIKE TO SEND MY FILE
+$loc= $current."\\";           // WHERE I WOULD LIKE TO SEND MY FILE
 move_uploaded_file($temporary,$loc.$img);
 
 // how to send many files to the serve
 
 // on the form after the name of the file i have to add [] =  name="filename[]"
 //
+
 
 if(isset($_POST['submit']))
 {
